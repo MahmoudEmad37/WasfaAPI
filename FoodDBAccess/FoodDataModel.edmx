@@ -1,0 +1,856 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FoodAPIv1.Models.FoodAPIContextModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="CateRecipes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Category_Id" Type="int" />
+          <Property Name="Recipe_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Favorites">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Recipe_Id" Type="int" />
+          <Property Name="User_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Followings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Follower_Id" Type="int" />
+          <Property Name="User_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Links">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Link" Type="text" />
+          <Property Name="User_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Ratings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RatingNum" Type="int" />
+          <Property Name="CreatedData" Type="datetime" />
+          <Property Name="Recipe_Id" Type="int" />
+          <Property Name="User_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="RecipeImages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageUrl" Type="text" />
+          <Property Name="Recipe_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Recipes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Nationality" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="PrepareTime" Type="datetime" />
+          <Property Name="RatingCount" Type="int" />
+          <Property Name="RatingTotal" Type="float" />
+          <Property Name="ReviewsCount" Type="int" />
+          <Property Name="ReviewsRateTotal" Type="float" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Ingredients" Type="text" />
+          <Property Name="Steps" Type="text" />
+        </EntityType>
+        <EntityType Name="Reviews">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReviewText" Type="text" />
+          <Property Name="ReviewResult" Type="bit" />
+          <Property Name="CreatedData" Type="datetime" />
+          <Property Name="Recipe_Id" Type="int" />
+          <Property Name="User_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="Email" Type="varchar(max)" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="Gender" Type="varchar(max)" />
+          <Property Name="ImageUrl" Type="text" />
+          <Property Name="Phone" Type="varchar(max)" />
+          <Property Name="Bio" Type="text" />
+          <Property Name="Nationality" Type="varchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="FollowersCount" Type="int" />
+        </EntityType>
+        <Association Name="FK_dbo_CateRecipes_dbo_Categories_Category_Id">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="CateRecipes" Type="Self.CateRecipes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CateRecipes">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CateRecipes_dbo_Recipes_Recipe_Id">
+          <End Role="Recipes" Type="Self.Recipes" Multiplicity="0..1" />
+          <End Role="CateRecipes" Type="Self.CateRecipes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CateRecipes">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Favorites_dbo_Recipes_Recipe_Id">
+          <End Role="Recipes" Type="Self.Recipes" Multiplicity="0..1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Favorites_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Favorites" Type="Self.Favorites" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Followings_dbo_Users_Follower_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Followings" Type="Self.Followings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Followings">
+              <PropertyRef Name="Follower_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Followings_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Followings" Type="Self.Followings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Followings">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Links_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Links" Type="Self.Links" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Links">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ratings_dbo_Recipes_Recipe_Id">
+          <End Role="Recipes" Type="Self.Recipes" Multiplicity="0..1" />
+          <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ratings_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Ratings" Type="Self.Ratings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RecipeImages_dbo_Recipes_Recipe_Id">
+          <End Role="Recipes" Type="Self.Recipes" Multiplicity="0..1" />
+          <End Role="RecipeImages" Type="Self.RecipeImages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipeImages">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Recipes_dbo_Users_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Recipes" Type="Self.Recipes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Reviews_dbo_Recipes_Recipe_Id">
+          <End Role="Recipes" Type="Self.Recipes" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Reviews_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FoodAPIv1ModelsFoodAPIContextModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CateRecipes" EntityType="Self.CateRecipes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favorites" EntityType="Self.Favorites" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Followings" EntityType="Self.Followings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Links" EntityType="Self.Links" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ratings" EntityType="Self.Ratings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecipeImages" EntityType="Self.RecipeImages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recipes" EntityType="Self.Recipes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviews" EntityType="Self.Reviews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_CateRecipes_dbo_Categories_Category_Id" Association="Self.FK_dbo_CateRecipes_dbo_Categories_Category_Id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="CateRecipes" EntitySet="CateRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CateRecipes_dbo_Recipes_Recipe_Id" Association="Self.FK_dbo_CateRecipes_dbo_Recipes_Recipe_Id">
+            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="CateRecipes" EntitySet="CateRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Favorites_dbo_Recipes_Recipe_Id" Association="Self.FK_dbo_Favorites_dbo_Recipes_Recipe_Id">
+            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Favorites_dbo_Users_User_Id" Association="Self.FK_dbo_Favorites_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Followings_dbo_Users_Follower_Id" Association="Self.FK_dbo_Followings_dbo_Users_Follower_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Followings" EntitySet="Followings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Followings_dbo_Users_User_Id" Association="Self.FK_dbo_Followings_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Followings" EntitySet="Followings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Links_dbo_Users_User_Id" Association="Self.FK_dbo_Links_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Links" EntitySet="Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ratings_dbo_Recipes_Recipe_Id" Association="Self.FK_dbo_Ratings_dbo_Recipes_Recipe_Id">
+            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ratings_dbo_Users_User_Id" Association="Self.FK_dbo_Ratings_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RecipeImages_dbo_Recipes_Recipe_Id" Association="Self.FK_dbo_RecipeImages_dbo_Recipes_Recipe_Id">
+            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="RecipeImages" EntitySet="RecipeImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Recipes_dbo_Users_UserId" Association="Self.FK_dbo_Recipes_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Recipes" EntitySet="Recipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Reviews_dbo_Recipes_Recipe_Id" Association="Self.FK_dbo_Reviews_dbo_Recipes_Recipe_Id">
+            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Reviews_dbo_Users_User_Id" Association="Self.FK_dbo_Reviews_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FoodAPIv1.Models.FoodAPIContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CateRecipes" Relationship="Self.FK_dbo_CateRecipes_dbo_Categories_Category_Id" FromRole="Categories" ToRole="CateRecipes" />
+        </EntityType>
+        <EntityType Name="CateRecipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Category_Id" Type="Int32" />
+          <Property Name="Recipe_Id" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_dbo_CateRecipes_dbo_Categories_Category_Id" FromRole="CateRecipes" ToRole="Categories" />
+          <NavigationProperty Name="Recipe" Relationship="Self.FK_dbo_CateRecipes_dbo_Recipes_Recipe_Id" FromRole="CateRecipes" ToRole="Recipes" />
+        </EntityType>
+        <EntityType Name="Favorite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Recipe_Id" Type="Int32" />
+          <Property Name="User_Id" Type="Int32" />
+          <NavigationProperty Name="Recipe" Relationship="Self.FK_dbo_Favorites_dbo_Recipes_Recipe_Id" FromRole="Favorites" ToRole="Recipes" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Favorites_dbo_Users_User_Id" FromRole="Favorites" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Following">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Follower_Id" Type="Int32" />
+          <Property Name="User_Id" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Followings_dbo_Users_Follower_Id" FromRole="Followings" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_dbo_Followings_dbo_Users_User_Id" FromRole="Followings" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Link">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Link1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="User_Id" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Links_dbo_Users_User_Id" FromRole="Links" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RatingNum" Type="Int32" />
+          <Property Name="CreatedData" Type="DateTime" Precision="3" />
+          <Property Name="Recipe_Id" Type="Int32" />
+          <Property Name="User_Id" Type="Int32" />
+          <NavigationProperty Name="Recipe" Relationship="Self.FK_dbo_Ratings_dbo_Recipes_Recipe_Id" FromRole="Ratings" ToRole="Recipes" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Ratings_dbo_Users_User_Id" FromRole="Ratings" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="RecipeImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Recipe_Id" Type="Int32" />
+          <NavigationProperty Name="Recipe" Relationship="Self.FK_dbo_RecipeImages_dbo_Recipes_Recipe_Id" FromRole="RecipeImages" ToRole="Recipes" />
+        </EntityType>
+        <EntityType Name="Recipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="PrepareTime" Type="DateTime" Precision="3" />
+          <Property Name="RatingCount" Type="Int32" />
+          <Property Name="RatingTotal" Type="Double" />
+          <Property Name="ReviewsCount" Type="Int32" />
+          <Property Name="ReviewsRateTotal" Type="Double" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Ingredients" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Steps" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CateRecipes" Relationship="Self.FK_dbo_CateRecipes_dbo_Recipes_Recipe_Id" FromRole="Recipes" ToRole="CateRecipes" />
+          <NavigationProperty Name="Favorites" Relationship="Self.FK_dbo_Favorites_dbo_Recipes_Recipe_Id" FromRole="Recipes" ToRole="Favorites" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK_dbo_Ratings_dbo_Recipes_Recipe_Id" FromRole="Recipes" ToRole="Ratings" />
+          <NavigationProperty Name="RecipeImages" Relationship="Self.FK_dbo_RecipeImages_dbo_Recipes_Recipe_Id" FromRole="Recipes" ToRole="RecipeImages" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Recipes_dbo_Users_UserId" FromRole="Recipes" ToRole="Users" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_dbo_Reviews_dbo_Recipes_Recipe_Id" FromRole="Recipes" ToRole="Reviews" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReviewText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReviewResult" Type="Boolean" />
+          <Property Name="CreatedData" Type="DateTime" Precision="3" />
+          <Property Name="Recipe_Id" Type="Int32" />
+          <Property Name="User_Id" Type="Int32" />
+          <NavigationProperty Name="Recipe" Relationship="Self.FK_dbo_Reviews_dbo_Recipes_Recipe_Id" FromRole="Reviews" ToRole="Recipes" />
+          <NavigationProperty Name="User" Relationship="Self.FK_dbo_Reviews_dbo_Users_User_Id" FromRole="Reviews" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Bio" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Nationality" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="FollowersCount" Type="Int32" />
+          <NavigationProperty Name="Favorites" Relationship="Self.FK_dbo_Favorites_dbo_Users_User_Id" FromRole="Users" ToRole="Favorites" />
+          <NavigationProperty Name="Followings" Relationship="Self.FK_dbo_Followings_dbo_Users_Follower_Id" FromRole="Users" ToRole="Followings" />
+          <NavigationProperty Name="Followings1" Relationship="Self.FK_dbo_Followings_dbo_Users_User_Id" FromRole="Users" ToRole="Followings" />
+          <NavigationProperty Name="Links" Relationship="Self.FK_dbo_Links_dbo_Users_User_Id" FromRole="Users" ToRole="Links" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK_dbo_Ratings_dbo_Users_User_Id" FromRole="Users" ToRole="Ratings" />
+          <NavigationProperty Name="Recipes" Relationship="Self.FK_dbo_Recipes_dbo_Users_UserId" FromRole="Users" ToRole="Recipes" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_dbo_Reviews_dbo_Users_User_Id" FromRole="Users" ToRole="Reviews" />
+        </EntityType>
+        <Association Name="FK_dbo_CateRecipes_dbo_Categories_Category_Id">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="CateRecipes" Type="Self.CateRecipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CateRecipes">
+              <PropertyRef Name="Category_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_CateRecipes_dbo_Recipes_Recipe_Id">
+          <End Role="Recipes" Type="Self.Recipe" Multiplicity="0..1" />
+          <End Role="CateRecipes" Type="Self.CateRecipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CateRecipes">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Favorites_dbo_Recipes_Recipe_Id">
+          <End Role="Recipes" Type="Self.Recipe" Multiplicity="0..1" />
+          <End Role="Favorites" Type="Self.Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Favorites_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Favorites" Type="Self.Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Favorites">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Followings_dbo_Users_Follower_Id">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Followings" Type="Self.Following" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Followings">
+              <PropertyRef Name="Follower_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Followings_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Followings" Type="Self.Following" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Followings">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Links_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Links" Type="Self.Link" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Links">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ratings_dbo_Recipes_Recipe_Id">
+          <End Role="Recipes" Type="Self.Recipe" Multiplicity="0..1" />
+          <End Role="Ratings" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Ratings_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Ratings" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ratings">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RecipeImages_dbo_Recipes_Recipe_Id">
+          <End Role="Recipes" Type="Self.Recipe" Multiplicity="0..1" />
+          <End Role="RecipeImages" Type="Self.RecipeImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecipeImages">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Recipes_dbo_Users_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Recipes" Type="Self.Recipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Recipes">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Reviews_dbo_Recipes_Recipe_Id">
+          <End Role="Recipes" Type="Self.Recipe" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recipes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="Recipe_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Reviews_dbo_Users_User_Id">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Reviews" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reviews">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="CateRecipes" EntityType="Self.CateRecipe" />
+          <EntitySet Name="Favorites" EntityType="Self.Favorite" />
+          <EntitySet Name="Followings" EntityType="Self.Following" />
+          <EntitySet Name="Links" EntityType="Self.Link" />
+          <EntitySet Name="Ratings" EntityType="Self.Rating" />
+          <EntitySet Name="RecipeImages" EntityType="Self.RecipeImage" />
+          <EntitySet Name="Recipes" EntityType="Self.Recipe" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_dbo_CateRecipes_dbo_Categories_Category_Id" Association="Self.FK_dbo_CateRecipes_dbo_Categories_Category_Id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="CateRecipes" EntitySet="CateRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_CateRecipes_dbo_Recipes_Recipe_Id" Association="Self.FK_dbo_CateRecipes_dbo_Recipes_Recipe_Id">
+            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="CateRecipes" EntitySet="CateRecipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Favorites_dbo_Recipes_Recipe_Id" Association="Self.FK_dbo_Favorites_dbo_Recipes_Recipe_Id">
+            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Favorites_dbo_Users_User_Id" Association="Self.FK_dbo_Favorites_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Favorites" EntitySet="Favorites" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Followings_dbo_Users_Follower_Id" Association="Self.FK_dbo_Followings_dbo_Users_Follower_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Followings" EntitySet="Followings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Followings_dbo_Users_User_Id" Association="Self.FK_dbo_Followings_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Followings" EntitySet="Followings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Links_dbo_Users_User_Id" Association="Self.FK_dbo_Links_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Links" EntitySet="Links" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ratings_dbo_Recipes_Recipe_Id" Association="Self.FK_dbo_Ratings_dbo_Recipes_Recipe_Id">
+            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Ratings_dbo_Users_User_Id" Association="Self.FK_dbo_Ratings_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Ratings" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RecipeImages_dbo_Recipes_Recipe_Id" Association="Self.FK_dbo_RecipeImages_dbo_Recipes_Recipe_Id">
+            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="RecipeImages" EntitySet="RecipeImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Recipes_dbo_Users_UserId" Association="Self.FK_dbo_Recipes_dbo_Users_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Recipes" EntitySet="Recipes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Reviews_dbo_Recipes_Recipe_Id" Association="Self.FK_dbo_Reviews_dbo_Recipes_Recipe_Id">
+            <End Role="Recipes" EntitySet="Recipes" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Reviews_dbo_Users_User_Id" Association="Self.FK_dbo_Reviews_dbo_Users_User_Id">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Reviews" EntitySet="Reviews" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FoodAPIv1ModelsFoodAPIContextModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CateRecipes">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.CateRecipe">
+              <MappingFragment StoreEntitySet="CateRecipes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+                <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favorites">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Favorite">
+              <MappingFragment StoreEntitySet="Favorites">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Followings">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Following">
+              <MappingFragment StoreEntitySet="Followings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Follower_Id" ColumnName="Follower_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Links">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Link">
+              <MappingFragment StoreEntitySet="Links">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Link1" ColumnName="Link" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Rating">
+              <MappingFragment StoreEntitySet="Ratings">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RatingNum" ColumnName="RatingNum" />
+                <ScalarProperty Name="CreatedData" ColumnName="CreatedData" />
+                <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecipeImages">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.RecipeImage">
+              <MappingFragment StoreEntitySet="RecipeImages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recipes">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Recipe">
+              <MappingFragment StoreEntitySet="Recipes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="PrepareTime" ColumnName="PrepareTime" />
+                <ScalarProperty Name="RatingCount" ColumnName="RatingCount" />
+                <ScalarProperty Name="RatingTotal" ColumnName="RatingTotal" />
+                <ScalarProperty Name="ReviewsCount" ColumnName="ReviewsCount" />
+                <ScalarProperty Name="ReviewsRateTotal" ColumnName="ReviewsRateTotal" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Ingredients" ColumnName="Ingredients" />
+                <ScalarProperty Name="Steps" ColumnName="Steps" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Review">
+              <MappingFragment StoreEntitySet="Reviews">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
+                <ScalarProperty Name="ReviewResult" ColumnName="ReviewResult" />
+                <ScalarProperty Name="CreatedData" ColumnName="CreatedData" />
+                <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Bio" ColumnName="Bio" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FollowersCount" ColumnName="FollowersCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

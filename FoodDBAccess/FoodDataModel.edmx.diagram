@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="61bafbefaf40424bbdf7fae9bf9a9233" Name="Diagram1">
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.Category" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.CateRecipe" Width="1.5" PointX="5.25" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.Favorite" Width="1.5" PointX="5.25" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.Following" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.Link" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.Rating" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.RecipeImage" Width="1.5" PointX="5.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.Recipe" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.Review" Width="1.5" PointX="8.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FoodAPIv1.Models.FoodAPIContextModel.User" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_CateRecipes_dbo_Categories_Category_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_CateRecipes_dbo_Recipes_Recipe_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_Favorites_dbo_Recipes_Recipe_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_Favorites_dbo_Users_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_Followings_dbo_Users_Follower_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_Followings_dbo_Users_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_Links_dbo_Users_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_Ratings_dbo_Recipes_Recipe_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_Ratings_dbo_Users_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_RecipeImages_dbo_Recipes_Recipe_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_Recipes_dbo_Users_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_Reviews_dbo_Recipes_Recipe_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="FoodAPIv1.Models.FoodAPIContextModel.FK_dbo_Reviews_dbo_Users_User_Id" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FoodAPIv1ModelsFoodAPIContextModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Category">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CateRecipes">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.CateRecipe">
+        <MappingFragment StoreEntitySet="CateRecipes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Category_Id" ColumnName="Category_Id" />
+          <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Favorites">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Favorite">
+        <MappingFragment StoreEntitySet="Favorites">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Followings">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Following">
+        <MappingFragment StoreEntitySet="Followings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Follower_Id" ColumnName="Follower_Id" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Links">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Link">
+        <MappingFragment StoreEntitySet="Links">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Link1" ColumnName="Link" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ratings">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Rating">
+        <MappingFragment StoreEntitySet="Ratings">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RatingNum" ColumnName="RatingNum" />
+          <ScalarProperty Name="CreatedData" ColumnName="CreatedData" />
+          <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RecipeImages">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.RecipeImage">
+        <MappingFragment StoreEntitySet="RecipeImages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recipes">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Recipe">
+        <MappingFragment StoreEntitySet="Recipes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="PrepareTime" ColumnName="PrepareTime" />
+          <ScalarProperty Name="RatingCount" ColumnName="RatingCount" />
+          <ScalarProperty Name="RatingTotal" ColumnName="RatingTotal" />
+          <ScalarProperty Name="ReviewsCount" ColumnName="ReviewsCount" />
+          <ScalarProperty Name="ReviewsRateTotal" ColumnName="ReviewsRateTotal" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Ingredients" ColumnName="Ingredients" />
+          <ScalarProperty Name="Steps" ColumnName="Steps" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.Review">
+        <MappingFragment StoreEntitySet="Reviews">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReviewText" ColumnName="ReviewText" />
+          <ScalarProperty Name="ReviewResult" ColumnName="ReviewResult" />
+          <ScalarProperty Name="CreatedData" ColumnName="CreatedData" />
+          <ScalarProperty Name="Recipe_Id" ColumnName="Recipe_Id" />
+          <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="FoodAPIv1.Models.FoodAPIContextModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Bio" ColumnName="Bio" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="FollowersCount" ColumnName="FollowersCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

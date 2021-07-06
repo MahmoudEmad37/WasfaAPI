@@ -1,0 +1,14 @@
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\bin\Debug\FoodAPIv1.Models.FoodAPIContext.mdf
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\bin\Debug\FoodAPIv1.Models.FoodAPIContext_log.ldf
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\bin\Debug\FoodDBAccess.dll.config
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\bin\Debug\FoodDBAccess.dll
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\bin\Debug\FoodDBAccess.pdb
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\bin\Debug\EntityFramework.dll
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\bin\Debug\EntityFramework.xml
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\obj\Debug\FoodDBAccess.csprojAssemblyReference.cache
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\obj\Debug\FoodDBAccess.csproj.CoreCompileInputs.cache
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\obj\Debug\FoodDBAccess.csproj.CopyComplete
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\obj\Debug\FoodDBAccess.dll
+C:\Users\MASTER\source\repos\FoodAPIv1\FoodDBAccess\obj\Debug\FoodDBAccess.pdb
